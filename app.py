@@ -180,7 +180,7 @@ def fetch_squawks():
             icao24 = safe(s[0])
             callsign = safe(s[1], "").strip()
             squawk = safe(s[14], "")
-            if callsign.startswith("EXS") and squawk in {"7700", "7600", "7500"}:
+            if callsign.startswith("") and squawk in {"7700", "7600", "7500"}:
                 emergencies.append(
                     {
                         "callsign": callsign,
@@ -314,7 +314,7 @@ TEMPLATE = """
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Jet2 Ops Monitor (Flask)</title>
+    <title>Airport Operations Monitor (Flask)</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -410,7 +410,7 @@ TEMPLATE = """
 </head>
 <body>
 <div class="container">
-    <h1>✈️ Jet2 Ops Monitor (Flask)</h1>
+    <h1>✈️Airport Operations Monitor (Flask)</h1>
     <p class="small">
         METAR/TAF from CheckWX · FIDS from AeroDataBox · Emergency squawks from OpenSky.
     </p>
@@ -442,7 +442,7 @@ TEMPLATE = """
 
     <div class="flex">
         <div class="card">
-            <h2>Jet2 Departures ({{ airport }})</h2>
+            <h2>Departures ({{ airport }})</h2>
             {% if dep_error %}
                 <p>{{ dep_error }}</p>
             {% elif departures %}
@@ -467,12 +467,12 @@ TEMPLATE = """
                     </tbody>
                 </table>
             {% else %}
-                <p>No Jet2 departures today.</p>
+                <p>No departures today.</p>
             {% endif %}
         </div>
 
         <div class="card">
-            <h2>Jet2 Arrivals ({{ airport }})</h2>
+            <h2>Arrivals ({{ airport }})</h2>
             {% if arr_error %}
                 <p>{{ arr_error }}</p>
             {% elif arrivals %}
@@ -497,13 +497,13 @@ TEMPLATE = """
                     </tbody>
                 </table>
             {% else %}
-                <p>No Jet2 arrivals today.</p>
+                <p>No arrivals today.</p>
             {% endif %}
         </div>
     </div>
 
     <div class="card">
-        <h2>Jet2 Emergency Squawks (OpenSky)</h2>
+        <h2>Emergency Squawks (OpenSky)</h2>
         {% if squawk_error %}
             <p>{{ squawk_error }}</p>
         {% elif squawks %}
@@ -526,7 +526,7 @@ TEMPLATE = """
                 </tbody>
             </table>
         {% else %}
-            <p>No Jet2 emergencies detected.</p>
+            <p>No emergencies detected.</p>
         {% endif %}
     </div>
 </div>
